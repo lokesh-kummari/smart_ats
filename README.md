@@ -1,3 +1,25 @@
+# Smart ATS
+
+Smart ATS is a web application designed to help users improve their resumes by evaluating them against a job description using a Large Language Model (LLM), specifically Google's Gemini AI model. The project is divided into two main parts: a React frontend and a Flask backend.
+
+## Project Structure
+
+smart-ats/
+├── backend/
+│ ├── server.py
+│ ├── requirements.txt
+│ └── .env
+├── frontend/
+│ ├── public/
+│ │ └── ima.jpeg
+│ ├── src/
+│ │ ├── App.js
+│ │ ├── App.css
+│ │ ├── index.js
+│ ├── package.json
+│ └── .env
+└── README.md
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -39,32 +61,50 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Configuration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Background Image: Place your background image (ima.jpeg) in the public directory. The background image is applied using CSS in src/App.css.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Backend (Flask)
+Setup
+# 1.Navigate to the backend directory:
+    cd backend
+# 2.Create a virtual environment:
+    python -m venv venv
+# 3.Activate the virtual environment:
+    Windows:
+    venv\Scripts\activate
+# 4.Install the dependencies:
+    pip install -r requirements.txt
+# 5.Create a .env file in the backend directory and add your API key:
+    GOOGLE_API_KEY=your_google_api_key_here
+# 6.Run the Flask server:
+    python server.py
+    Your Flask server should now be running on http://localhost:5000/.
+## Requirements
+   Create a requirements.txt file in the backend directory with the following content:
+        Flask==2.0.3
+        google-generativeai==0.1.0
+        python-dotenv==0.21.0
+        PyPDF2==3.0.1
+## How It Works
+   Frontend: The React frontend allows users to upload their resume (in PDF format) and paste a job description. It sends this data to the backend Flask server for processing.
 
-### Code Splitting
+    Backend: The Flask server performs the following tasks:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    Extracts text from the uploaded PDF resume.
+    Sends the resume text and job description to the Gemini AI model for evaluation.
+    Receives the evaluation results and sends them back to the frontend.
+    Gemini AI Model: The Gemini AI model, accessed via the Google API, evaluates the resume against the job description. It provides a percentage match, missing keywords, and a profile summary.
+## Usage
+    Open the React application in your browser at http://localhost:3001/.
 
-### Analyzing the Bundle Size
+    Paste the job description into the provided text area.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    Upload your resume as a PDF file using the file uploader.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    Click "Submit" to receive the evaluation results.
+## Contributing
+    Feel free to open issues or submit pull requests. Contributions to improve the application are always welcome!
+## License
+    This project is licensed under the MIT License. See the LICENSE file for more details.
